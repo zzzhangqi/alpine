@@ -1,24 +1,20 @@
 kind: pipeline
 name: default
 
+platform:
+  os: linux
+  arch: arm64
+
 steps:
 - name: test
   image: docker:dind
   volumes:
   - name: dockersock
-    path: /var/run
+    path: /var/run/docker.sock
   commands:
-  - sleep 5 # give docker enough time to start
-  - uname -m
-
-services:
-- name: docker
-  image: docker:dind
-  privileged: true
-  volumes:
-  - name: dockersock
-    path: /var/run
+  - uname -a
 
 volumes:
 - name: dockersock
-  temp: {}
+  host:
+    path: /var/run/docker.sock
