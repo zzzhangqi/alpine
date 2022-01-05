@@ -7,14 +7,7 @@ platform:
 
 steps:
 - name: test
-  image: docker:dind
-  volumes:
-  - name: dockersock
-    path: /var/run/docker.sock
+  image: alpine
   commands:
   - uname -a
 
-volumes:
-- name: dockersock
-  host:
-    path: /var/run/docker.sock
